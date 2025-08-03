@@ -65,4 +65,32 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+  /* Add these styles to the bottom of src/App.css */
+
+.separator {
+  margin: 1.5rem 0;
+  color: #888;
+  font-weight: bold;
+}
+
+.file-form input[type="file"] {
+  display: none; /* Hide the default ugly button */
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 400px;
+  box-shadow: var(--box-shadow);
+  font-weight: 500;
+}
+
+.custom-file-upload:hover {
+  background-color: #f1f1f1;
+}
 }

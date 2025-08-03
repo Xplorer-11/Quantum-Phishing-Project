@@ -15,18 +15,84 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   background-color: var(--bg-color);
   color: var(--font-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
 }
 
-.container {
-  max-width: 600px;
-  width: 90%;
-  text-align: center;
-  padding: 2rem;
+/* --- 3-COLUMN LAYOUT STYLES --- */
+.app-layout {
+  display: flex;
+  gap: 2rem; /* space between columns */
+  width: 95%;
+  max-width: 1800px;
+  margin: 2rem auto;
+  align-items: flex-start; /* Aligns items to the top */
 }
+
+.main-content {
+  flex: 2; /* Takes up 2/4 (50%) of the space */
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-content {
+  flex: 1; /* Takes up 1/4 (25%) of the space */
+  display: flex;
+  flex-direction: column;
+  height: 90vh; /* Give sidebars a max height */
+}
+
+/* --- FIX: Reduced max-width from 700px to 600px --- */
+/* This centers and constrains the content within the main column */
+.main-content header,
+.main-content main {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Make the main content area take up available vertical space */
+.main-content main {
+  flex-grow: 1;
+}
+
+/* Adjust dashboard and chatbot to fill their sidebars */
+.sidebar-content .dashboard-container,
+.sidebar-content .chatbot-container {
+  margin-top: 0;
+  width: 100%;
+  height: 100%; /* Makes the component fill the vertical space */
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-content .dashboard-container {
+    background-color: #fff; /* Give dashboard a white background */
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.sidebar-content .dashboard-card {
+  flex-grow: 1;
+  overflow-y: auto;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 1200px) {
+  .app-layout {
+    flex-direction: column; /* Stack columns vertically */
+  }
+  .sidebar-content {
+    height: auto; /* Reset height for stacked view */
+    max-height: 600px; /* Optional: constrain height in stacked view */
+    width: 100%;
+  }
+}
+
+/* --- EXISTING & UPDATED STYLES --- */
 
 header h1 {
   font-size: 3rem;
@@ -84,6 +150,33 @@ header p {
   cursor: not-allowed;
 }
 
+.separator {
+  margin: 1.5rem 0;
+  color: #888;
+  font-weight: bold;
+}
+
+.file-form input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 400px;
+  box-shadow: var(--box-shadow);
+  font-weight: 500;
+}
+
+.custom-file-upload:hover {
+  background-color: #f1f1f1;
+}
+
 .result-card {
   margin-top: 2rem;
   padding: 1.5rem;
@@ -122,7 +215,120 @@ header p {
   to { opacity: 1; transform: translateY(0); }
 }
 
-footer {
-  margin-top: 3rem;
-  color: #888;
+/* Dashboard Styles */
+.dashboard-container h2 {
+  text-align: center;
+  margin-top: 0;
+  color: var(--primary-color);
+}
+.dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100%;
+}
+.dashboard-card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid #eee;
+}
+.dashboard-card h3 {
+  margin-top: 0;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+.dashboard-card ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.dashboard-card li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+.dashboard-card li span {
+  word-break: break-all;
+  margin-right: 1rem;
+}
+.dashboard-card li.phishing strong {
+  color: var(--phishing-color);
+}
+.dashboard-card li.legitimate strong {
+  color: var(--legit-color);
+}
+
+/* Chatbot Styles */
+.chatbot-container {
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.chatbot-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+}
+.chatbot-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.chatbot-messages {
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.message {
+  padding: 0.6rem 1rem;
+  border-radius: 18px;
+  max-width: 80%;
+  line-height: 1.4;
+  white-space: pre-wrap; /* To respect newlines from the AI */
+}
+.message.user {
+  background-color: #e0e0e0;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+.message.assistant {
+  background-color: var(--primary-color);
+  color: white;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+.chatbot-input-form {
+  display: flex;
+  border-top: 1px solid #ddd;
+  padding: 0.5rem;
+}
+.chatbot-input-form input {
+  flex-grow: 1;
+  border: none;
+  padding: 0.75rem;
+  outline: none;
+  font-size: 1rem;
+}
+.chatbot-input-form button {
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0 1.5rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: bold;
+}
+.chatbot-input-form button:disabled {
+  background-color: #95a5a6;
 }
