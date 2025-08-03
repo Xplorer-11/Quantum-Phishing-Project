@@ -1,0 +1,18 @@
+# Web Framework and Server
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+
+# Quantum Machine Learning
+qiskit==1.1.0
+qiskit-machine-learning==0.8.0
+qiskit-algorithms==0.3.0
+
+# Classical ML & Data Handling
+# Changed scikit-learn to a version with better pre-compiled wheel support on Windows
+scikit-learn==1.4.2
+pandas==2.2.2
+numpy==1.26.4
+joblib==1.4.2
+
+# Data Repository Utility
+ucimlrepo==0.0.6
